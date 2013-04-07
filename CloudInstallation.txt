@@ -1,0 +1,112 @@
+References : 
+https://hortonworks.com/kb/generating-ssh-keys-for-passwordless-login/
+http://blog.sqrrl.com/post/40578606670/quick-accumulo-install
+
+
+Cloud Installation
+
+create cloud directories
+
+/usr/loca/cloud/hadoop
+/usr/loca/cloud/hadoop/hdfs
+/usr/loca/cloud/zookeeper
+/usr/loca/cloud/accumulo
+
+
+create hdfs keys with no password
+
+ssh-keygen -t dsa -P '' -f ~/.ssh/id_hadoop_dsa
+
+cat ~/.ssh/id_hadoop_dsa.pub >> ~/.ssh/authorized_keys
+
+ssh-add ~/.ssh/id_hadoop_dsa
+
+
+download hadoop
+
+wget or curl -O 
+ 
+Hadoop Mirrors
+http://apache.petsads.us/hadoop/common/hadoop-<version>/<file>
+http://www.poolsaboveground.com/apache/hadoop/common/hadoop-<version>/<file>
+http://mirror.cc.columbia.edu/pub/software/apache/hadoop/common/hadoop-<version>/<file>
+
+
+Hadoop Files
+hadoop-<version>.tar.gz
+hadoop-<version>.tar.gz.asc
+
+untar hadoop-<version>.tar.gz /usr/local/hadoop
+create a symbolic link to hadoop-<version> hadoop-current
+
+edit conf/hadoop-env.sh
+
+
+
+add HADOOP_HOME to path
+
+add configuration to 
+conf/core-site.xml
+
+<configuration>
+	<property>
+		<name>fs.default.name</name>
+		<value>hdfs://localhost:9000</value>
+	</property>
+</configuration>
+
+
+add next lines to conf/hdfs-site.xml
+
+<configuration>
+	<property>
+		<name>dfs.data.dir</name>
+		<value>/usr/local/cloud/hadoop/hdfs/data</value>
+	</property>
+	<property>
+		<name>dfs.name.dir</name>
+		<value>/usr/local/cloud/hadoop/hdfs/name</value>
+	</property>
+	<property>
+		<name>dfs.replication</name>
+		<value>1</value>
+	</property>
+</configuration>
+
+
+add to conf/mapred-site.xml
+
+<configuration>
+	<property>
+		<name>mapred.job.tracker</name>
+		<value>localhost:9001</value>
+	</property>
+</configuration>
+
+
+format new distributed filesystem
+
+/usr/local/cloud/hadoop/current/bin/hadoop namenode -format
+
+
+start hadoop daemons
+
+/usr/local/cloud/hadoop/current/bin/start-all.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
