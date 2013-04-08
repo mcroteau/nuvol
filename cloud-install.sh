@@ -1,12 +1,14 @@
 #!/bin/bash
 
 downloadType="wget"
+
+
+## HADOOP INSTALL ##
 hadoop_version="1.1.2"
-hadoop_download_name="hadoop-$hadoop_version"
-hadoop_download_file="$hadoop_download_name.tar.gz"
-hadoop_download_file_asc="$hadoop_download_name.tar.gz.asc"
-hadoop_download_mirror="http://apache.petsads.us/hadoop/common"
-hadoop_download_location="$hadoop_download_mirror/$hadoop_download_name/$hadoop_download_file"
+hadoop_file_name="hadoop-$hadoop_version"
+hadoop_download="$hadoop_file_name.tar.gz"
+hadoop_mirror="http://apache.petsads.us/hadoop/common"
+hadoop_download_uri="$hadoop_mirror/$hadoop_file_name/$hadoop_download"
 #http://apache.petsads.us/hadoop/common/hadoop-<version>/<file>
 #http://www.poolsaboveground.com/apache/hadoop/common/hadoop-<version>/<file>
 #http://mirror.cc.columbia.edu/pub/software/apache/hadoop/common/hadoop-<version>/<file>
@@ -22,15 +24,17 @@ mkdir -p tmp/cloud/accumulo
 
 echo "directories created"
 
-echo "downloading hadoop version $hadoop_version from $hadoop_download_mirror"
-$downloadType $hadoop_download_location
-  
-echo "downloaded hadoop artifact"
+
 cd tmp/cloud/hadoop
 
-tar -xvf ../../../$hadoop_download_file
+echo "downloading hadoop version $hadoop_version from $hadoop_mirror"
+$downloadType $hadoop_download_uri
+  
+echo "downloaded hadoop artifact"
 
-ln -s $hadoop_download_name current
+tar -xvf $hadoop_download
+
+ln -s $hadoop_file_name current
 
 d=$(pwd)
 echo "current directory $d"
@@ -105,6 +109,47 @@ EOF
 echo "STARTING HADOOP"
 
 /Users/mcroteau/Desktop/CloudArtifacts/tmp/cloud/hadoop/current/bin/start-all.sh
+
+
+
+
+## ZOOKEEPER INSTALL ##
+
+#ZOOKEEPER MIRRORS
+#http://mirrors.gigenet.com/apache/zookeeper
+#http://mirror.sdunix.com/apache/zookeeper
+#http://apache.petsads.us/zookeeper
+
+zookeeper_version=3.3.6
+zookeeper_file_name=hadoop-$zookeeper_version
+zookeeper_download=$zookeeper_file_name.tar.gz
+zookeeper_mirror=http://mirrors.gigenet.com/apache/zookeeper
+zookeeper_download_uri=$zookeeper_mirror/$zookeeper_file_name/$zookeeper_download
+
+
+echo "downloading zookeeper version $zookeeper_version from $zookeeper_mirror"
+wget $zookeeper_download_uri
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
