@@ -1,19 +1,19 @@
 #!/bin/bash
 
-#http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
-script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+JAVA_HOME=$(echo $JAVA_HOME)
+DOWNLOAD_TYPE="wget"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-while getopts "v:" flag; do
-    case $flag in
-        v)
-            hadoop_version=$OPTARG
-            echo "Using Hadoop Version"
-            ;;
-    esac
-done
-	
+source ${SCRIPT_DIR}/mirrors.sh
+source ${SCRIPT_DIR}/hadoop.sh
+source ${SCRIPT_DIR}/util.sh	
 
-source ${script_dir}/mirrors.sh
-source ${script_dir}/hadoop.sh
+INSTALL_DIR=${INSTALL_DIR:-/usr/local/tmp/cloud}
 
-hadoop
+mkdir -p ${INSTALL_DIR}/hadoop
+mkdir -p ${INSTALL_DIR}/hadoop/hdfs
+mkdir -p ${INSTALL_DIR}/zookeeper
+mkdir -p ${INSTALL_DIR}/accumulo
+
+
+installHadoop
