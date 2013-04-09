@@ -19,7 +19,7 @@ while getopts "h:i:help" flag; do
     esac
 done
 
-if [[ -z ${JAVA_HOME} ]] 
+if [[ -z $(echo $JAVA_HOME) ]] 
 then
 	echo "*****************************************"
 	echo "JAVA_HOME environment variable is not set"
