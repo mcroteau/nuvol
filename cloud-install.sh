@@ -1,5 +1,6 @@
 #!/bin/bash
 
+bob=$1
 downloadType="wget"
 base_dir=/usr/local/tmp/cloud
 
