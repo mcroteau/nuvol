@@ -4,14 +4,14 @@ HADOOP_FILE=hadoop-${HADOOP_VERSION}
 DEVELOPMENT=false
 
 function installHadoop(){
-	setDownloadUri
+	setHadoopDownloadUri
 	navigateHadoopDir
 	downloadHadoop
 	configureHadoop
 }
 
 function configureHadoop(){
-	setCurrent
+	setHadoopCurrent
 	setJavaHome
 	configureCore
 	configureHdfs
@@ -32,7 +32,7 @@ function startHadoop(){
 }
 
 
-function setCurrent(){
+function setHadoopCurrent(){
 	$(tar -xvf $HADOOP_FILE.tar.gz)
 	$(ln -s $HADOOP_FILE current)	
 }
@@ -118,7 +118,7 @@ function downloadHadoop(){
 }
 
 
-function setDownloadUri(){
+function setHadoopDownloadUri(){
 	
 	for mirror in "${HADOOP_MIRRORS[@]}"
 	do
@@ -126,6 +126,8 @@ function setDownloadUri(){
 		local site=$(echo $mirror | sed "s/version/${HADOOP_VERSION}/g")
 		local available=$(ping -c1 $host > /dev/null && echo "YES" || echo "NO")
 		if [[ $available == "YES" ]]; then
+			echo "SITE $site"
+			echo "SITE $host"
 			HADOOP_DOWNLOAD_URI=$site
 			break;
 		else

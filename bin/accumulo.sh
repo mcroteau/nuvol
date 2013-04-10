@@ -1,17 +1,17 @@
 #Global variables include ACCUMULO_VERSION, ACCUMULO_DOWNLOAD_URI, ACCUMULO_FILE, ACCUMULO_FILE_PREFIX
-ACCUMULO_VERSION=${ACCUMULO_VERSION:-3.3.6}
+ACCUMULO_VERSION=${ACCUMULO_VERSION:-1.4.2}
 ACCUMULO_FILE=accumulo-${ACCUMULO_VERSION}
-DEVELOPMENT=true
+DEVELOPMENT=false
 
 function installAccumulo(){
-	setDownloadUri
+	setAccumuloDownloadUri
 	navigateAccumuloDir
 	downloadAccumulo
 	configureAccumulo
 }
 
 function configureAccumulo(){
-	setCurrent
+	setAccumuloCurrent
 	copyConfigs
 	setupEnvironment
 	createLogsDir
@@ -19,8 +19,8 @@ function configureAccumulo(){
 	startAccumulo
 }
 
-function setCurrent(){
-	$(tar -xvf ${ACCUMULO_FILE}.tar.gz)
+function setAccumuloCurrent(){
+	$(tar -xvf ${ACCUMULO_FILE}-dist.tar.gz)
 	$(ln -s ${ACCUMULO_FILE} current)	
 }
 
@@ -29,9 +29,9 @@ function copyConfigs(){
 }
 
 function setupEnvironment(){
-	sed -i.bak "s:/path/to/java:${JAVA_HOME}:;\
-	            s:/path/to/hadoop:${HADOOP_HOME}:;\
-	            s:/path/to/zookeeper:${ZOOKEEPER_HOME}:;\
+	sed -i.bak "s:/path/to/java:$(echo $JAVA_HOME):;\
+	            s:/path/to/hadoop:${INSTALL_DIR}/hadoop/current:;\
+	            s:/path/to/zookeeper:${INSTALL_DIR}/zookeeper/current:;\
 	            s:-Xss128k:-Xss256k:" "${INSTALL_DIR}/accumulo/current/conf/accumulo-env.sh"
 }
 
@@ -66,7 +66,7 @@ function downloadAccumulo(){
 }
 
 
-function setDownloadUri(){
+function setAccumuloDownloadUri(){
 	
 	for mirror in "${ACCUMULO_MIRRORS[@]}"
 	do

@@ -8,6 +8,6 @@ ZOOKEEPER_MIRRORS[0]='http://mirrors.gigenet.com/apache/zookeeper/zookeeper-vers
 ZOOKEEPER_MIRRORS[1]='http://mirror.sdunix.com/apache/zookeeper/zookeeper-version/zookeeper-version.tar.gz'
 ZOOKEEPER_MIRRORS[2]='http://apache.petsads.us/zookeeper/zookeeper-version/zookeeper-version.tar.gz'
 
-ACCUMULO_MIRRORS[0]='http://mirror.sdunix.com/apache/accumulo/version/accumulo-version.tar.gz'
-ACCUMULO_MIRRORS[1]='http://apache.claz.org/accumulo/version/accumulo-version.tar.gz'
-ACCUMULO_MIRRORS[2]='http://download.nextag.com/apache/accumulo/version/accumulo-version.tar.gz'
+ACCUMULO_MIRRORS[0]='http://mirrors.ibiblio.org/apache/accumulo/version/accumulo-version-dist.tar.gz'
+ACCUMULO_MIRRORS[1]='http://apache.claz.org/accumulo/version/accumulo-version-dist.tar.gz'
+ACCUMULO_MIRRORS[2]='http://mirror.metrocast.net/apache/accumulo/version/accumulo-version-dist.tar.gz'

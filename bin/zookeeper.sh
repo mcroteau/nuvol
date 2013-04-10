@@ -1,23 +1,23 @@
 #Global variables include ZOOKEEPER_VERSION, ZOOKEEPER_DOWNLOAD_URI, ZOOKEEPER_FILE, ZOOKEEPER_FILE_PREFIX
 ZOOKEEPER_VERSION=${ZOOKEEPER_VERSION:-3.3.6}
 ZOOKEEPER_FILE=zookeeper-${ZOOKEEPER_VERSION}
-DEVELOPMENT=true
+DEVELOPMENT=false
 
 function installZookeeper(){
-	setDownloadUri
+	setZookeeperDownloadUri
 	navigateZookeeperDir
 	downloadZookeeper
 	configureZookeeper
 }
 
 function configureZookeeper(){
-	setCurrent
+	setZookeeperCurrent
 	createDataDir
 	configureZooConfig
 	startZookeeper
 }
 
-function setCurrent(){
+function setZookeeperCurrent(){
 	$(tar -xvf ${ZOOKEEPER_FILE}.tar.gz)
 	$(ln -s ${ZOOKEEPER_FILE} current)	
 }
@@ -60,7 +60,7 @@ function downloadZookeeper(){
 }
 
 
-function setDownloadUri(){
+function setZookeeperDownloadUri(){
 	
 	for mirror in "${ZOOKEEPER_MIRRORS[@]}"
 	do

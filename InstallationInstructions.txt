@@ -7,10 +7,10 @@ Cloud Installation
 
 create cloud directories
 
-/usr/loca/cloud/hadoop
-/usr/loca/cloud/hadoop/hdfs
-/usr/loca/cloud/zookeeper
-/usr/loca/cloud/accumulo
+/usr/local/cloud/hadoop
+/usr/local/cloud/hadoop/hdfs
+/usr/local/cloud/zookeeper
+/usr/local/cloud/accumulo
 
 
 create hdfs keys with no password
