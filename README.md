@@ -1,45 +1,45 @@
-#HADOOP + ZOOKEEPER + ACCUMULO Installation Script
+#HADOOP + ZOOKEEPER + ACCUMULO Bash Installer
 
-References : 
-https://hortonworks.com/kb/generating-ssh-keys-for-passwordless-login/
-http://blog.sqrrl.com/post/40578606670/quick-accumulo-install
-
-
-Cloud Installation
 
 create cloud directories
 
-/usr/local/cloud/hadoop
+<pre><code>/usr/local/cloud/hadoop
 /usr/local/cloud/hadoop/hdfs
 /usr/local/cloud/zookeeper
 /usr/local/cloud/accumulo
-
+</code></pre>
 
 create hdfs keys with no password
 
 ssh-keygen -t dsa -P '' -f ~/.ssh/id_hadoop_dsa
 
-cat ~/.ssh/id_hadoop_dsa.pub >> ~/.ssh/authorized_keys
+cat ~/.ssh/id_hadoop_dsa.pub &gt;&gt; ~/.ssh/authorized_keys
 
 ssh-add ~/.ssh/id_hadoop_dsa
 
+
+##Install Hadoop
 
 download hadoop
 
 wget or curl -O 
  
 Hadoop Mirrors
-http://apache.petsads.us/hadoop/common/hadoop-<version>/<file>
-http://www.poolsaboveground.com/apache/hadoop/common/hadoop-<version>/<file>
-http://mirror.cc.columbia.edu/pub/software/apache/hadoop/common/hadoop-<version>/<file>
-
+```
+http://apache.petsads.us/hadoop/common/hadoop-&lt;version&gt;/&lt;file&gt;
+http://www.poolsaboveground.com/apache/hadoop/common/hadoop-&lt;version&gt;/&lt;file&gt;
+http://mirror.cc.columbia.edu/pub/software/apache/hadoop/common/hadoop-&lt;version&gt;/&lt;file&gt;
+```
 
 Hadoop Files
-hadoop-<version>.tar.gz
-hadoop-<version>.tar.gz.asc
+```
+hadoop-&lt;version&gt;.tar.gz
+hadoop-&lt;version&gt;.tar.gz.asc
+```
 
-untar hadoop-<version>.tar.gz /usr/local/hadoop
-create a symbolic link to hadoop-<version> hadoop-current
+untar hadoop-&lt;version&gt;.tar.gz /usr/local/hadoop
+
+create a symbolic link to hadoop-&lt;version&gt; hadoop-current
 
 edit conf/hadoop-env.sh
 
@@ -50,63 +50,64 @@ add HADOOP_HOME to path
 add configuration to 
 conf/core-site.xml
 
-<configuration>
-	<property>
-		<name>fs.default.name</name>
-		<value>hdfs://localhost:9000</value>
-	</property>
-</configuration>
-
+<pre><code>&lt;configuration&gt;
+	&lt;property&gt;
+		&lt;name&gt;fs.default.name&lt;/name&gt;
+		&lt;value&gt;hdfs://localhost:9000&lt;/value&gt;
+	&lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
 
 add next lines to conf/hdfs-site.xml
 
-<configuration>
-	<property>
-		<name>dfs.data.dir</name>
-		<value>/usr/local/cloud/hadoop/hdfs/data</value>
-	</property>
-	<property>
-		<name>dfs.name.dir</name>
-		<value>/usr/local/cloud/hadoop/hdfs/name</value>
-	</property>
-	<property>
-		<name>dfs.replication</name>
-		<value>1</value>
-	</property>
-</configuration>
+<pre><code>&lt;configuration&gt;
+	&lt;property&gt;
+		&lt;name&gt;dfs.data.dir&lt;/name&gt;
+		&lt;value&gt;/usr/local/cloud/hadoop/hdfs/data&lt;/value&gt;
+	&lt;/property&gt;
+	&lt;property&gt;
+		&lt;name&gt;dfs.name.dir&lt;/name&gt;
+		&lt;value&gt;/usr/local/cloud/hadoop/hdfs/name&lt;/value&gt;
+	&lt;/property&gt;
+	&lt;property&gt;
+		&lt;name&gt;dfs.replication&lt;/name&gt;
+		&lt;value&gt;1&lt;/value&gt;
+	&lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
 
+add to `conf/mapred-site.xml`
 
-add to conf/mapred-site.xml
-
-<configuration>
-	<property>
-		<name>mapred.job.tracker</name>
-		<value>localhost:9001</value>
-	</property>
-</configuration>
+<pre><code>&lt;configuration&gt;
+	&lt;property&gt;
+		&lt;name&gt;mapred.job.tracker&lt;/name&gt;
+		&lt;value&gt;localhost:9001&lt;/value&gt;
+	&lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
 
 
 format new distributed filesystem
 
-/usr/local/cloud/hadoop/current/bin/hadoop namenode -format
+`/usr/local/cloud/hadoop/current/bin/hadoop namenode -format`
 
 
 start hadoop daemons
 
-/usr/local/cloud/hadoop/current/bin/start-all.sh
+`/usr/local/cloud/hadoop/current/bin/start-all.sh`
 
 
 
 
-INSTALL ZOOKEEPER
+##Install Zookeeper
 
 Download & untar Zookeeper package from one of the mirrors below
 
-http://mirrors.gigenet.com/apache/zookeeper/zookeeper-<version>/<file>
-http://mirror.sdunix.com/apache/zookeeper/zookeeper-<version>/<file>
-http://apache.petsads.us/zookeeper/zookeeper-<version>/<file>
+http://mirrors.gigenet.com/apache/zookeeper/zookeeper-&lt;version&gt;/&lt;file&gt;
+http://mirror.sdunix.com/apache/zookeeper/zookeeper-&lt;version&gt;/&lt;file&gt;
+http://apache.petsads.us/zookeeper/zookeeper-&lt;version&gt;/&lt;file&gt;
 
-create symbolic link to /usr/local/cloud/zookeeper/zookeeper-<version> current
+create symbolic link to /usr/local/cloud/zookeeper/zookeeper-&lt;version&gt; current
 
 create a /usr/local/cloud/zookeeper/current/conf/zoo.cfg with contents below : 
 
@@ -124,16 +125,16 @@ start zookeeper
 
 
 
-INSTALL ACCUMULO
+##Install Accumulo
 
 Download & untar Accumulo package from one of the mirrors below
 
-http://mirror.sdunix.com/apache/accumulo/<version>/<file>
-http://apache.claz.org/accumulo/<version>/<file>
-http://download.nextag.com/apache/accumulo/<version>/<file>
+http://mirror.sdunix.com/apache/accumulo/&lt;version&gt;/&lt;file&gt;
+http://apache.claz.org/accumulo/&lt;version&gt;/&lt;file&gt;
+http://download.nextag.com/apache/accumulo/&lt;version&gt;/&lt;file&gt;
 
 
-create symbolic link to /usr/local/cloud/accumulo/accumulo-<version> current
+create symbolic link to /usr/local/cloud/accumulo/accumulo-&lt;version&gt; current
 
 copy simple example configuration files 
 
@@ -156,6 +157,10 @@ Choose a name and root password for your instance when prompted.
 Start Accumulo using the bin/start-all.sh script.
 
 Browse to the Accumulo Monitor page http://localhost:50095  to confirm you are live
+
+
+####References : 
+[http://blog.sqrrl.com/post/40578606670/quick-accumulo-install](http://blog.sqrrl.com/post/40578606670/quick-accumulo-install)
 
 
 
