@@ -1,4 +1,4 @@
-#HADOOP + ZOOKEEPER + ACCUMULO Bash Installer
+#Hadoop, Zookeeper & Accumulo Bash Installer
 
 
 create cloud directories
