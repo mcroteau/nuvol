@@ -21,8 +21,7 @@ Once the installation script has downloaded and installed everything, you will b
 
 ***
 
-#####* Note 
-`JAVA_HOME` must be set
+#####* Note `JAVA_HOME` must be set
 
 
 #####* The script follows installation instructions provided by Sqrrl.
