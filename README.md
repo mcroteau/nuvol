@@ -7,7 +7,7 @@ By default the script will install all 3 artifacts in `/usr/local/cloud`.  Use `
 Once the installation script has downloaded and installed everything, you will be prompted to give Accumulo an instance name and a password for root. 
 
 
-###Confirm installation by browsing to
+Confirm installation by browsing to :
 
 ####Name Node Monitor 
 [http://localhost:50070](http://localhost:50070)
