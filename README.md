@@ -25,7 +25,7 @@ Once the installation script has downloaded and installed everything, you will b
 `JAVA_HOME` must be set
 
 
-#####*The script follows installation instructions provided by Sqrrl.
+#####* The script follows installation instructions provided by Sqrrl.
  [http://blog.sqrrl.com/post/40578606670/quick-accumulo-install](http://blog.sqrrl.com/post/40578606670/quick-accumulo-install)
 
 
