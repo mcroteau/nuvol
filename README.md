@@ -1,7 +1,9 @@
 #Hadoop, Zookeeper & Accumulo Bash Installer
 
 
-The following script will install and start a single node instance of Hadoop, Zookeeper and Accumulo.  `./bin/nuvol.sh` will start the installation process. By default the script will install all 3 libraries in `/usr/local/cloud`.  Use `-i` with a preferred location to install elsewhere. 
+The following script will install and start a single node instance of Hadoop, Zookeeper and Accumulo.  `./bin/nuvol.sh` will start the installation process. 
+
+By default the script will install all 3 libraries in `/usr/local/cloud`.  Use `-i` with a preferred location to install elsewhere. 
 
 The script follows installation instructions provided by Sqrrl. [http://blog.sqrrl.com/post/40578606670/quick-accumulo-install](http://blog.sqrrl.com/post/40578606670/quick-accumulo-install)
 
