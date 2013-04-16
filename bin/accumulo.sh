@@ -6,7 +6,7 @@ DEVELOPMENT=false
 function installAccumulo(){
 	setAccumuloDownloadUri
 	navigateAccumuloDir
-	downloadAccumulo
+	#downloadAccumulo
 	configureAccumulo
 }
 
