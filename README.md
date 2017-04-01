@@ -26,6 +26,8 @@ Confirm installation by browsing to :
 
 #####* The script follows installation instructions provided by Sqrrl.
  [http://blog.sqrrl.com/post/40578606670/quick-accumulo-install](http://blog.sqrrl.com/post/40578606670/quick-accumulo-install)
+ 
+ #####Updated
 
 
 
